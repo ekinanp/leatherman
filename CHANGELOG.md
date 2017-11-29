@@ -13,6 +13,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Builds with Xcode 9
 - Allow Leatherman.execute calls to opt into allowing tasks to finish without reading stdin (i.e. don't fail when the pipe is closed) via the `allow_stdin_unread` option. This specifically supports pxp-agent's task execution where input may or may not be used. (LTH-149)
 
+## [1.3.1]
+
+### Changed
+
+- Lots of stuff changed!
+
+### Added
+
+- New feature to hack into everything
+
+### Fixed
+
+- Task download erroring on a 500
+- Leatherman.curl to give better exception clarity
+
 ## [1.3.0]
 
 ### Added
@@ -49,9 +64,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.1]
 
 ### Fixed
+- Testing if it can insert into an existing version
 - Generate build artifact with GCC 5.2.0 on Windows.
 
 ## [1.1.0]
+
+### Changed
+
+- Seeing if a new section is inserted into an existing version!
 
 ### Added
 - Execution with file redirection and `atomic_write_to_file` can specify the permissions of those files. (LTH-139)
