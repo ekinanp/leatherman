@@ -173,6 +173,7 @@ namespace leatherman { namespace curl {
     {
         if (!_handle) {
             throw http_exception(_("failed to create cURL handle."));
+            _("BLAH MESSAGE FOR TRANSLATION")
         }
     }
 
