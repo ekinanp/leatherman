@@ -76,6 +76,10 @@ msgstr ""
 msgid "failed to create cURL handle."
 msgstr ""
 
+#: curl/src/client.cc
+msgid "BLAH MESSAGE FOR TRANSLATION"
+msgstr ""
+
 #. debug
 #: curl/src/client.cc
 msgid "request completed (status {1})."
@@ -193,8 +197,7 @@ msgstr ""
 msgid "completed processing output: closing child pipes."
 msgstr ""
 
-#: execution/src/posix/execution.cc
-#: windows/src/system_error.cc
+#: execution/src/posix/execution.cc windows/src/system_error.cc
 msgid "{1} ({2})"
 msgstr ""
 
@@ -206,8 +209,7 @@ msgstr ""
 msgid "select call failed"
 msgstr ""
 
-#: execution/src/posix/execution.cc
-#: execution/src/windows/execution.cc
+#: execution/src/posix/execution.cc execution/src/windows/execution.cc
 msgid "child i/o failed."
 msgstr ""
 
@@ -217,8 +219,7 @@ msgid "select call was interrupted and will be retried."
 msgstr ""
 
 #. error
-#: execution/src/posix/execution.cc
-#: execution/src/windows/execution.cc
+#: execution/src/posix/execution.cc execution/src/windows/execution.cc
 msgid "{1} pipe i/o failed: {2}."
 msgstr ""
 
@@ -227,8 +228,7 @@ msgstr ""
 msgid "{1} pipe i/o was interrupted and will be retried."
 msgstr ""
 
-#: execution/src/posix/execution.cc
-#: execution/src/windows/execution.cc
+#: execution/src/posix/execution.cc execution/src/windows/execution.cc
 msgid "command timed out after {1} seconds."
 msgstr ""
 
@@ -237,13 +237,11 @@ msgid "{1}={2}"
 msgstr ""
 
 #. debug
-#: execution/src/posix/execution.cc
-#: execution/src/windows/execution.cc
+#: execution/src/posix/execution.cc execution/src/windows/execution.cc
 msgid "{1} was not found on the PATH."
 msgstr ""
 
-#: execution/src/posix/execution.cc
-#: execution/src/windows/execution.cc
+#: execution/src/posix/execution.cc execution/src/windows/execution.cc
 msgid "child process returned non-zero exit status."
 msgstr ""
 
@@ -587,8 +585,7 @@ msgid "error finding FOLDERID_ProgramData: {1}"
 msgstr ""
 
 #. debug
-#: windows/src/process.cc
-#: windows/src/user.cc
+#: windows/src/process.cc windows/src/user.cc
 msgid "OpenProcessToken call failed: {1}"
 msgstr ""
 
