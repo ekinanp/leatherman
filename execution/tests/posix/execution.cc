@@ -409,12 +409,12 @@ SCENARIO("executing commands with execution::execute") {
         }
         WHEN("the 'throw on non-zero exit' option is used") {
             THEN("a child exit exception is thrown") {
-                REQUIRE_THROWS_AS(execute("ls", {"does_not_exist"}, 0, {execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_nonzero_exit}), child_exit_exception);
+                REQUIRE_THROWS_AS(execute("ls", {"does_not_exist"}, 0, {execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_nonzero_exit}), child_exit_exception&);
             }
         }
         WHEN("the 'throw on signal' option is used") {
             THEN("a child signal exception is thrown") {
-                REQUIRE_THROWS_AS(execute("sh", { EXEC_TESTS_DIRECTORY "/fixtures/execution/selfkill.sh" }, 0, { execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_signal }), child_signal_exception);
+                REQUIRE_THROWS_AS(execute("sh", { EXEC_TESTS_DIRECTORY "/fixtures/execution/selfkill.sh" }, 0, { execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_signal }), child_signal_exception&);
             }
         }
     }
@@ -679,12 +679,12 @@ SCENARIO("executing commands with execution::each_line") {
         }
         WHEN("the 'throw on non-zero exit' option is used") {
             THEN("a child exit exception is thrown") {
-                REQUIRE_THROWS_AS(each_line("ls", {"does_not_exist"}, nullptr, nullptr, 0, {execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_nonzero_exit}), child_exit_exception);
+                REQUIRE_THROWS_AS(each_line("ls", {"does_not_exist"}, nullptr, nullptr, 0, {execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_nonzero_exit}), child_exit_exception&);
             }
         }
         WHEN("the 'throw on signal' option is used") {
             THEN("a child signal exception is thrown") {
-                REQUIRE_THROWS_AS(each_line("sh", { EXEC_TESTS_DIRECTORY "/fixtures/execution/selfkill.sh" }, nullptr, nullptr, 0, { execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_signal }), child_signal_exception);
+                REQUIRE_THROWS_AS(each_line("sh", { EXEC_TESTS_DIRECTORY "/fixtures/execution/selfkill.sh" }, nullptr, nullptr, 0, { execution_options::trim_output, execution_options::merge_environment, execution_options::throw_on_signal }), child_signal_exception&);
             }
         }
     }

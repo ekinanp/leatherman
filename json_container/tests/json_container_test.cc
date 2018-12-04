@@ -85,7 +85,7 @@ TEST_CASE("JsonContainer::JsonContainer - passing JSON string", "[data]") {
 
     SECTION("it should throw a data_parse_error in case of empty string") {
         json_value = "";
-        REQUIRE_THROWS_AS(JsonContainer { json_value }, data_parse_error);
+        REQUIRE_THROWS_AS(JsonContainer { json_value }, data_parse_error&);
     }
 
     SECTION("it should throw a data_parse_error in case of invalid JSON") {
@@ -101,7 +101,7 @@ TEST_CASE("JsonContainer::JsonContainer - passing JSON string", "[data]") {
             json_value = "1, 2, 3";
         }
 
-        REQUIRE_THROWS_AS(JsonContainer { json_value }, data_parse_error);
+        REQUIRE_THROWS_AS(JsonContainer { json_value }, data_parse_error&);
     }
 }
 
@@ -183,41 +183,41 @@ TEST_CASE("JsonContainer::get for object entries", "[data]") {
 
     SECTION("it throws a data_key_error in case of unknown object entry") {
         SECTION("unknown root object entry") {
-            REQUIRE_THROWS_AS(data.get<int>("unknown"), data_key_error);
+            REQUIRE_THROWS_AS(data.get<int>("unknown"), data_key_error&);
         }
 
         SECTION("unknown nested object entry") {
             REQUIRE_THROWS_AS(data.get<int>({ "nested", "unknown" }),
-                              data_key_error);
+                              data_key_error&);
         }
     }
 
     SECTION("it throws a data_type_error in case of mismatch") {
         SECTION("root entry") {
             SECTION("not a boolean") {
-                REQUIRE_THROWS_AS(data.get<bool>("string"), data_type_error);
+                REQUIRE_THROWS_AS(data.get<bool>("string"), data_type_error&);
             }
 
             SECTION("not an integer") {
-                REQUIRE_THROWS_AS(data.get<int>("real"), data_type_error);
+                REQUIRE_THROWS_AS(data.get<int>("real"), data_type_error&);
             }
 
             SECTION("not a double") {
-                REQUIRE_THROWS_AS(data.get<double>("goo"), data_type_error);
+                REQUIRE_THROWS_AS(data.get<double>("goo"), data_type_error&);
             }
 
             SECTION("not a string") {
-                REQUIRE_THROWS_AS(data.get<std::string>("real"), data_type_error);
+                REQUIRE_THROWS_AS(data.get<std::string>("real"), data_type_error&);
             }
 
             SECTION("array mismatches") {
                 SECTION("not an array") {
                     REQUIRE_THROWS_AS(data.get<std::vector<int>>("goo"),
-                                      data_type_error);
+                                      data_type_error&);
                 }
 
                 SECTION("mismatch type on array entry") {
-                    REQUIRE_THROWS_AS(data.get<double>("goo"), data_type_error);
+                    REQUIRE_THROWS_AS(data.get<double>("goo"), data_type_error&);
                 }
             }
         }
@@ -227,34 +227,34 @@ TEST_CASE("JsonContainer::get for object entries", "[data]") {
 
             SECTION("not a boolean") {
                 REQUIRE_THROWS_AS(data.get<bool>({ "foo", "spam", "string" }),
-                                  data_type_error);
+                                  data_type_error&);
             }
 
             SECTION("not an integer") {
                 REQUIRE_THROWS_AS(data.get<int>({ "foo", "spam", "real" }),
-                                  data_type_error);
+                                  data_type_error&);
             }
 
             SECTION("not a double") {
                 REQUIRE_THROWS_AS(data.get<double>({ "foo", "spam", "goo" }),
-                                  data_type_error);
+                                  data_type_error&);
             }
 
             SECTION("not a string") {
                 REQUIRE_THROWS_AS(data.get<std::string>({ "foo", "spam", "real" }),
-                                  data_type_error);
+                                  data_type_error&);
             }
 
             SECTION("array mismatches") {
                 SECTION("not an array") {
                     REQUIRE_THROWS_AS(
                         data.get<std::vector<int>>({ "foo", "spam", "goo" }),
-                        data_type_error);
+                        data_type_error&);
                 }
 
                 SECTION("mismatch type on array entry") {
                     REQUIRE_THROWS_AS(data.get<double>({ "foo", "spam", "goo" }),
-                                      data_type_error);
+                                      data_type_error&);
                 }
             }
         }
@@ -296,23 +296,23 @@ TEST_CASE("JsonContainer::get for object entries", "[data]") {
         SECTION("it throws a data_type_error in case of type mismatch") {
             SECTION("root entry") {
                 JsonContainer a { "[1, 2, 3]" };
-                REQUIRE_THROWS_AS(a.get<std::string>(1), data_type_error);
+                REQUIRE_THROWS_AS(a.get<std::string>(1), data_type_error&);
             }
 
             SECTION("object entry") {
                 REQUIRE_THROWS_AS(data.get<std::string>("vec", 1),
-                                  data_type_error);
+                                  data_type_error&);
             }
         }
 
         SECTION("it throws a data_index_error in case of index out of bounds") {
             SECTION("root entry") {
                 JsonContainer a { "[1, 2, 3]" };
-                REQUIRE_THROWS_AS(a.get<int>(10), data_index_error);
+                REQUIRE_THROWS_AS(a.get<int>(10), data_index_error&);
             }
 
             SECTION("object entry") {
-                REQUIRE_THROWS_AS(data.get<int>("vec", 10), data_index_error);
+                REQUIRE_THROWS_AS(data.get<int>("vec", 10), data_index_error&);
             }
         }
 
@@ -409,7 +409,7 @@ TEST_CASE("JsonContainer::getWithDefault", "[data]") {
     }
 
     SECTION("throw a data_type_error if the root entry is not an object") {
-        REQUIRE_THROWS_AS(data_a.getWithDefault<int>("foo", 42), data_type_error);
+        REQUIRE_THROWS_AS(data_a.getWithDefault<int>("foo", 42), data_type_error&);
     }
 
     SECTION("it can provide a default value if a nested key is not found") {
@@ -439,7 +439,7 @@ TEST_CASE("JsonContainer::getWithDefault", "[data]") {
         more_data_a.set<std::vector<int>>("ints_entry", ints);
 
         REQUIRE_THROWS_AS(more_data_a.getWithDefault<int>({ "ints_entry", "foo" }, 42),
-                          data_type_error);
+                          data_type_error&);
     }
 }
 
@@ -885,7 +885,7 @@ TEST_CASE("JsonContainer::set", "[data]") {
         JsonContainer data_array { json_array };
 
         REQUIRE_THROWS_AS(data_array.set<std::string>("foo", "bar"),
-                          data_key_error);
+                          data_key_error&);
     }
 
     SECTION("it should throw a data_key_error in case a known inner key is not "
@@ -893,7 +893,7 @@ TEST_CASE("JsonContainer::set", "[data]") {
         JsonContainer d_c { JSON };
 
         REQUIRE_THROWS_AS(d_c.set<std::string>({ "vec", "foo" }, "bar"),
-                          data_key_error);
+                          data_key_error&);
     }
 }
 
@@ -941,7 +941,7 @@ TEST_CASE("JsonContainer::type", "[data]") {
     SECTION("When a single key is passed") {
         SECTION("it throws a data_key_error if the key is unknown") {
             REQUIRE_THROWS_AS(data.type("foo"),
-                              data_key_error);
+                              data_key_error&);
         }
 
         SECTION("it can distinguish a Bool (false) value") {
@@ -1001,7 +1001,7 @@ TEST_CASE("JsonContainer::type", "[data]") {
 
         SECTION("it throws a data_key_error if a key is unknown") {
             REQUIRE_THROWS_AS(data.type({ "stuff", "bar" }),
-                              data_key_error);
+                              data_key_error&);
         }
 
         SECTION("it can distinguish a Bool (false) value") {
@@ -1058,7 +1058,7 @@ TEST_CASE("JsonContainer::type for arrays entries", "[data]") {
     SECTION("root entry") {
         SECTION("array") {
             JsonContainer not_an_aray { JSON };
-            REQUIRE_THROWS_AS(not_an_aray.type(1), data_type_error);
+            REQUIRE_THROWS_AS(not_an_aray.type(1), data_type_error&);
         }
 
         SECTION("array with values of different types") {

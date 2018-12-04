@@ -138,7 +138,7 @@ TEST_CASE("api::exception_to_string", "[ruby-api]") {
     SECTION("can print exception details") {
         try {
             ruby.eval("raise 'test_exception'");
-        } catch (runtime_error exc) {
+        } catch (runtime_error& exc) {
             REQUIRE(string(exc.what()) == "test_exception");
         }
     }
@@ -147,7 +147,7 @@ TEST_CASE("api::exception_to_string", "[ruby-api]") {
         ruby.include_stack_trace(true);
         try {
             ruby.eval("raise 'test_exception'");
-        } catch (runtime_error exc) {
+        } catch (runtime_error& exc) {
             REQUIRE(string(exc.what()).find("backtrace") != string::npos);
         }
     }
